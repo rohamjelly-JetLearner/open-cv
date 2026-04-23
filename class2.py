@@ -41,3 +41,27 @@ cv2.waitKey(0)
 greyscale2=cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)
 cv2.imshow('greyscale 2',greyscale2)
 cv2.waitKey(0)
+row,column=img1.shape[0:2]
+for i in range(row):
+    for o in range(column):
+        img1[i][o]=sum(img1[i][o])*0.33
+cv2.imshow('greyscale 3',img1)
+cv2.waitKey(0)
+img1=cv2.imread('C:/Users/Ehsan/OneDrive/Desktop/roham coding/open cv/class file/images/img1.jfif',1)
+img1_r=cv2.getRotationMatrix2D((row/2,column/2),angle=90,scale=1)
+rimg=cv2.warpAffine(img1,img1_r,(row,column))
+cv2.imshow('rotated img', rimg)
+cv2.waitKey(0)
+img_edge=cv2.Canny(img1,-100,200)
+cv2.imshow('edge detection',img_edge)
+cv2.waitKey(0)
+hsv=cv2.cvtColor(img1,cv2.COLOR_BGR2HSV)
+cv2.imshow('hsv',hsv)
+cv2.waitKey(0)
+start=(0,0)
+end=(200,200)
+thickness=10
+color=(0,0,0)
+line_img=cv2.line(img1,start,end,color,thickness)
+cv2.imshow('line',line_img)
+cv2.waitKey(0)
