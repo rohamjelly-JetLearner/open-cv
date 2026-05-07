@@ -13,12 +13,10 @@ cv2.imshow('blurred greyscale',blur_g)
 cv2.waitKey(0)
 det_c=cv2.HoughCircles(blur_g,cv2.HOUGH_GRADIENT,1,1,param1=125,param2=77,minRadius=5,maxRadius=77)
 h=len(det_c)
-print(h)
 if h != 0 :
     det_c=np.uint16(np.around(det_c))
     l=len(det_c)
-    for i in range(l):
-        s7=det_c[i]
+    for s7 in det_c[0,:]:
         s77=cv2.circle(img,(s7[0],s7[1]),s7[2],(0,0,0),5)
         cv2.imshow('detected circle',s77)
         cv2.waitKey(0)
