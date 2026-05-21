@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img=cv2.imread(r'C:\Users\Ehsan\OneDrive\Desktop\roham coding\open cv\class file\images\circle1.png',1)
+img=cv2.imread(r'C:\Users\Ehsan\OneDrive\Desktop\roham coding\open cv\class file\images\image4.png',1)
 img=cv2.resize(img,(200,200))
 cv2.imshow('circle',img)
 cv2.waitKey(0)
@@ -11,7 +11,7 @@ cv2.waitKey(0)
 blur_g=cv2.blur(greyscale,(3,3))
 cv2.imshow('blurred greyscale',blur_g)
 cv2.waitKey(0)
-det_c=cv2.HoughCircles(blur_g,cv2.HOUGH_GRADIENT,1,1,param1=125,param2=77,minRadius=5,maxRadius=77)
+det_c=cv2.HoughCircles(blur_g,cv2.HOUGH_GRADIENT,1,1,param1=125,param2=47,minRadius=1,maxRadius=77)
 h=len(det_c)
 if h != 0 :
     det_c=np.uint16(np.around(det_c))
@@ -23,7 +23,7 @@ if h != 0 :
     
 param=cv2.SimpleBlobDetector_Params()
 param.filterByArea=True
-param.minArea=1
+param.minArea=10
 param.filterByCircularity=True
 param.minCircularity=0.25
 param.filterByConvexity=True
