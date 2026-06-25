@@ -20,5 +20,10 @@ while vid.isOpened():
     err=np.array([180,255,255])
     mask1=cv2.inRange(hsv,srr,err)
     mask2=mask1+mask
-    
+    mask3=cv2.morphologyEx(mask2,cv2.MORPH_OPEN,np.ones((3,3),np.uint8),iterations=5)
+    mask4=cv2.bitwise_not(mask3)
+    result=cv2.bitwise_and(bg,bg,mask=mask3)
+    result1=cv2.bitwise_and(frames,frames,mask4)
+    result2=result+result1
+    res=cv2.imshow('image',result2)
 
