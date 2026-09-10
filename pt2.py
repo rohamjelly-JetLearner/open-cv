@@ -1,5 +1,6 @@
 import cv2
 import os
+import numpy as np
 
 haar=r'C:\Users\Ehsan\OneDrive\Desktop\roham coding\open cv\face recognition\haarcascade_frontalface_default.xml'
 face=r'C:\Users\Ehsan\OneDrive\Desktop\roham coding\open cv\face recognition\faceimg' 
@@ -16,4 +17,19 @@ for folder,subfolder,files in os.walk(face):
             img_path=os.path.join(fold_path,image)
             img.append(cv2.imread(img_path,0))
             labels.append(id)
-            
+
+imgl=np.array(img)
+label_l=np.array(labels)
+mod=cv2.face.LBPHFaceRecognizer_create()
+mod.train(imgl,label_l)
+facec=cv2.CascadeClassifier(haar)
+web=cv2.VideoCapture(0)
+while True:
+    w_b,imgw=web.read()
+    imgw=cv2.cvtColor(imgw,cv2.COLOR_BGR2GRAY)
+    rect=facec.detectMultiScale(imgw,scaleFactor=1.1,minNeighbors=3,minSize=(30,30))
+    print(rect)
+    for (x,y,w,h) in rect:
+        face=imgw[y:y+h,x:x+w]
+        predict=mod.predict(face)
+print(predict)        
