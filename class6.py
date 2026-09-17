@@ -11,6 +11,7 @@ if not os.path.isdir(path):
 cas=cv2.CascadeClassifier(haar)
 cam=cv2.VideoCapture(0)
 number=1
+num=0
 for i in range(30):
     camvalid,camimage=cam.read()
     camgrey=cv2.cvtColor(camimage,cv2.COLOR_BGR2GRAY)
@@ -19,4 +20,7 @@ for i in range(30):
     for (x,y,w,h) in rect:
         face=camgrey[y:y+h,x:x+w]
         cv2.imwrite('%s/%s.png'%(sf,number),face)
+    if camvalid==True:
+        num+=1
     number+=1
+print(num)
