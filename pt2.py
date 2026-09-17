@@ -15,7 +15,9 @@ for folder,subfolder,files in os.walk(face):
         fold_path=os.path.join(face,fold)
         for image in os.listdir(fold_path):
             img_path=os.path.join(fold_path,image)
-            img.append(cv2.imread(img_path,0))
+            img_=cv2.imread(img_path,0)
+            img_=cv2.resize(img_,(200,200))
+            img.append(img_)
             labels.append(id)
 
 imgl=np.array(img)
@@ -32,4 +34,5 @@ while True:
     for (x,y,w,h) in rect:
         face=imgw[y:y+h,x:x+w]
         predict=mod.predict(face)
-print(predict)        
+        cv2.rectangle(imgw,(x,y),(x+w,y+h),(0,0,0),1)
+    cv2.imshow('face recogniser',imgw)
